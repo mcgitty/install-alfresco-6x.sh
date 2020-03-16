@@ -80,7 +80,7 @@ dir.root=$PWD/alf_data
 dir.keystore=\${dir.root}/keystore
 
 db.driver=org.gjt.mm.mysql.Driver
-db.url=jdbc:mysql://localhost/alf607ce?useUnicode=yes&characterEncoding=UTF-8
+db.url=jdbc:mysql://localhost/alf612ce?useUnicode=yes&characterEncoding=UTF-8
 db.username=alfresco
 db.password=alfresco
 
