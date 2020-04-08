@@ -117,6 +117,7 @@ solr.base.url=/solr
 alfresco-pdf-renderer.exe=bin/alfresco-pdf-renderer
 alfresco.rmi.services.host=0.0.0.0
 messaging.broker.url=vm://localhost?broker.persistent=false
+local.transform.service.enabled=false
 
 smart.folders.enabled=true
 smart.folders.model=alfresco/model/smartfolder-model.xml
