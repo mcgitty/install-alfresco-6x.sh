@@ -12,6 +12,16 @@ for f in apache_tomcat alfresco_content alfresco_search; do
   echo Found $found
   eval ${f}="$found"
 done
+for ver in ${alfresco_content//-/ }; do [[ $ver == [0-9]* ]] && break; done
+for jdk in `"$JAVA_HOME/bin/java" -version 2>&1`; do
+  jdk=${jdk//\"} && [[ $jdk == [0-9]* ]] && break
+done
+if [[ $ver > "6.2" && $jdk < "11" ]]; then
+  echo ACS 6.2 or higher requires JAVA_HOME set to JDK 11 or higher
+  exit
+fi
+[[ "$jdk" < "1.9" ]] && JDK8_OPTS="-XX:+UseConcMarkSweepGC -XX:+UseParNewGC"
+
 mkdir -p modules/platform modules/share tmp
 unzip -q $apache_tomcat -d tmp
 mv tmp/* tomcat
@@ -30,9 +40,9 @@ cd ..
 rm -rf webapps
 ln -s ../web-server/webapps .
 ln -s ../web-server/shared .
-cat > bin/setenv.sh <<-'END'
-	JAVA_OPTS="-XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -Djava.awt.headless=true -XX:ReservedCodeCacheSize=128m $JAVA_OPTS "
-	JAVA_OPTS="-Xms512M -Xmx8192M -Djgroups.bind_addr=127.0.0.1 $JAVA_OPTS "
+cat > bin/setenv.sh <<-END
+	JAVA_OPTS="-XX:+DisableExplicitGC -Djava.awt.headless=true -XX:ReservedCodeCacheSize=128m \$JAVA_OPTS"
+	JAVA_OPTS="-Xms512M -Xmx8192M -Djgroups.bind_addr=127.0.0.1 \$JAVA_OPTS $JDK8_OPTS"
 	export JAVA_OPTS
 END
 cd ..
