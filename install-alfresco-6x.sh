@@ -28,7 +28,11 @@ mv tmp/* tomcat
 unzip -q $alfresco_search -d tmp
 mv tmp/* search-services
 unzip -q $alfresco_content -d tmp
-cd tmp/*; mv * ../..; cd ../..; rmdir tmp/*
+if [[ -d tmp/bin ]]; then # no parent folder in ACS zip
+  mv tmp/* .
+else
+  cd tmp/*; mv * ../..; cd ../..; rmdir tmp/*
+fi
 mv tmp logs
 
 chmod +x bin/*.sh tomcat/bin/*.sh
@@ -81,6 +85,8 @@ cd ../tomcat/lib
 wget --no-check-certificate https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.48/mysql-connector-java-5.1.48.jar
 cd ../..
 
+# Disable https from solr to alfresco (NOT FOR PRODUCTION)
+echo 'SOLR_OPTS="$SOLR_OPTS -Dalfresco.secureComms=none"' >> search-services/solr.in.sh
 # First time Solr startup
 search-services/solr/bin/solr start -a "-Dcreate.alfresco.defaults=alfresco,archive"
 
@@ -90,7 +96,7 @@ dir.root=$PWD/alf_data
 dir.keystore=\${dir.root}/keystore
 
 db.driver=org.gjt.mm.mysql.Driver
-db.url=jdbc:mysql://localhost/alf612ce?useUnicode=yes&characterEncoding=UTF-8
+db.url=jdbc:mysql://localhost/alf620ce?useUnicode=yes&characterEncoding=UTF-8
 db.username=alfresco
 db.password=alfresco
 
