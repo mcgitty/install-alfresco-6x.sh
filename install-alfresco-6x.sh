@@ -72,14 +72,16 @@ chmod +x alfresco.sh
 bin/apply_amps.sh
 rm web-server/webapps/alfresco.war-*.bak
 
-mv alfresco-pdf-renderer pdf-renderers; cd pdf-renderers
-if [[ $OSTYPE == darwin* ]]; then
-  # Get the missing PDF Renderer for Mac
-  wget --no-check-certificate https://artifacts.alfresco.com/nexus/content/repositories/public/org/alfresco/alfresco-pdf-renderer/1.1/alfresco-pdf-renderer-1.1-osx.tgz
-  tar xzf alfresco-pdf-renderer-*-osx.tgz
+if [[ -d alfresco-pdf-renderer ]]; then
+  mv alfresco-pdf-renderer pdf-renderers
 else
-  tar xzf alfresco-pdf-renderer-*-linux.tgz
+  mkdir pdf-renderers
 fi
+cd pdf-renderers; os=linux && [[ $OSTYPE == darwin* ]] && os=osx
+if [[ ! -f alfresco-pdf-renderer-1.1-${os}.tgz ]]; then
+  wget --no-check-certificate https://artifacts.alfresco.com/nexus/content/repositories/public/org/alfresco/alfresco-pdf-renderer/1.1/alfresco-pdf-renderer-1.1-${os}.tgz
+fi
+tar xzf alfresco-pdf-renderer-*-${os}.tgz
 mv alfresco-pdf-renderer ../bin/
 cd ../tomcat/lib
 wget --no-check-certificate https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.48/mysql-connector-java-5.1.48.jar
@@ -129,3 +131,17 @@ smart.folders.enabled=true
 smart.folders.model=alfresco/model/smartfolder-model.xml
 smart.folders.model.labels=alfresco/messages/smartfolder-model
 END
+
+if [[ ! -d alf_data/keystore ]]; then
+  mkdir -p alf_data/keystore
+  cp -p keystore/metadata-keystore/* alf_data/keystore/
+  cat >> web-server/shared/classes/alfresco-global.properties <<-'END'
+	encryption.keystore.keyMetaData.location=${dir.keystore}/keystore-passwords.properties
+	encryption.keystore.type=JCEKS
+END
+  cd web-server/webapps
+  mkdir WEB-INF/lib
+  wget --no-check-certificate -P WEB-INF/lib https://repo1.maven.org/maven2/org/apache/activemq/activemq-broker/5.15.9/activemq-broker-5.15.9.jar
+  zip alfresco.war WEB-INF/lib/*
+  rm -rf WEB-INF
+fi
