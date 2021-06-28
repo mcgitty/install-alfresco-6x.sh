@@ -20,7 +20,7 @@ if [[ $ver > "6.2" && $jdk < "11" ]]; then
   echo ACS 6.2 or higher requires JAVA_HOME set to JDK 11 or higher
   exit
 fi
-[[ "$jdk" < "1.9" ]] && JDK8_OPTS="-XX:+UseConcMarkSweepGC -XX:+UseParNewGC"
+[ "$jdk" \< "1.9" ] && JDK8_OPTS="-XX:+UseConcMarkSweepGC -XX:+UseParNewGC"
 
 mkdir -p modules/platform modules/share tmp
 unzip -q $apache_tomcat -d tmp
@@ -45,20 +45,20 @@ rm -rf webapps
 ln -s ../web-server/webapps .
 ln -s ../web-server/shared .
 cat > bin/setenv.sh <<-END
+	JAVA_HOME=${JAVA_HOME}
 	JAVA_OPTS="-XX:+DisableExplicitGC -Djava.awt.headless=true -XX:ReservedCodeCacheSize=128m \$JAVA_OPTS"
 	JAVA_OPTS="-Xms512M -Xmx8192M -Djgroups.bind_addr=127.0.0.1 \$JAVA_OPTS $JDK8_OPTS"
-	export JAVA_OPTS
+	export JAVA_HOME JAVA_OPTS
 END
 cd ..
-sed -e "s|JAVA_HOME=|JAVA_HOME=${JAVA_HOME}|" > alfresco.sh <<-'END'
+cat > alfresco.sh <<-'END'
 	#!/bin/bash
 
 	cd `dirname $0`
 	catalina=tomcat/bin/catalina.sh
 
-	export JAVA_HOME=
 	export LC_ALL="en_US.UTF-8"
-	export JAVA_OPTS="-Duser.timezone=PST -Dalfresco.home=$PWD"
+	export JAVA_OPTS="-Dalfresco.home=$PWD"
 	export CATALINA_PID=tomcat/temp/catalina.pid
 
 	if [ -f $catalina ]; then
@@ -88,7 +88,7 @@ wget --no-check-certificate https://repo1.maven.org/maven2/mysql/mysql-connector
 cd ../..
 
 # Disable https from solr to alfresco (NOT FOR PRODUCTION)
-echo 'SOLR_OPTS="$SOLR_OPTS -Dalfresco.secureComms=none"' >> search-services/solr.in.sh
+find search-services -name solrcore.properties -exec sed -i.bak -e 's|\(alfresco.secureComms\).*|\1=none|' {} \;
 # First time Solr startup
 search-services/solr/bin/solr start -a "-Dcreate.alfresco.defaults=alfresco,archive"
 
