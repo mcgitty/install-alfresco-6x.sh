@@ -41,7 +41,8 @@ Here are the MySQL commands to create the schema:
 
     $ mysql -u root
     create schema alf620ce default character set utf8;
-    grant all on alf620ce.* to 'alfresco'@'localhost' identified by 'alfresco' with grant option;
+    create user 'alfresco'@'localhost' identified by 'alfresco';
+    grant all on alf620ce.* to 'alfresco'@'localhost' with grant option;
 
 ## Start and Stop Alfresco
 
@@ -57,6 +58,5 @@ The install script already starts Solr 6 for you. Subsequent start and stop comm
 
 ## Host Environments
 This install script works in Mac OSX and Ubuntu. It should also work in other flavors of Linux, but it has not been tested in Cygwin or MinGW on Windows.
-
 
 .
