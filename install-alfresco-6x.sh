@@ -45,7 +45,7 @@ rm -rf webapps
 ln -s ../web-server/webapps .
 ln -s ../web-server/shared .
 cat > bin/setenv.sh <<-END
-	JAVA_HOME=${JAVA_HOME}
+	JAVA_HOME="${JAVA_HOME}"
 	JAVA_OPTS="-XX:+DisableExplicitGC -Djava.awt.headless=true -XX:ReservedCodeCacheSize=128m \$JAVA_OPTS"
 	JAVA_OPTS="-Xms512M -Xmx8192M -Djgroups.bind_addr=127.0.0.1 \$JAVA_OPTS $JDK8_OPTS"
 	export JAVA_HOME JAVA_OPTS
@@ -89,6 +89,7 @@ cd ../..
 
 # Disable https from solr to alfresco (NOT FOR PRODUCTION)
 find search-services -name solrcore.properties -exec sed -i.bak -e 's|\(alfresco.secureComms\).*|\1=none|' {} \;
+echo JAVA_HOME=\"${JAVA_HOME}\" >> search-services/solr.in.sh
 # First time Solr startup
 search-services/solr/bin/solr start -a "-Dcreate.alfresco.defaults=alfresco,archive"
 
