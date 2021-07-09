@@ -88,7 +88,7 @@ wget --no-check-certificate https://repo1.maven.org/maven2/mysql/mysql-connector
 cd ../..
 
 # Disable https from solr to alfresco (NOT FOR PRODUCTION)
-find search-services -name solrcore.properties -exec sed -i.bak -e 's|\(alfresco.secureComms\).*|\1=none|' {} \;
+echo 'SOLR_OPTS="$SOLR_OPTS -Dalfresco.secureComms=none"' >> search-services/solr.in.sh
 echo JAVA_HOME=\"${JAVA_HOME}\" >> search-services/solr.in.sh
 # First time Solr startup
 search-services/solr/bin/solr start -a "-Dcreate.alfresco.defaults=alfresco,archive"
