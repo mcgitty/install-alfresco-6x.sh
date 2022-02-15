@@ -141,7 +141,7 @@ if [[ ! -d alf_data/keystore ]]; then
 	encryption.keystore.type=JCEKS
 END
   cd web-server/webapps
-  mkdir WEB-INF/lib
+  mkdir -p WEB-INF/lib
   wget --no-check-certificate -P WEB-INF/lib https://repo1.maven.org/maven2/org/apache/activemq/activemq-broker/5.15.9/activemq-broker-5.15.9.jar
   zip alfresco.war WEB-INF/lib/*
   rm -rf WEB-INF
