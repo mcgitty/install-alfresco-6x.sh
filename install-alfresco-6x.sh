@@ -69,9 +69,10 @@ cat > alfresco.sh <<-'END'
 END
 chmod +x alfresco.sh
 
-bin/apply_amps.sh
-rm web-server/webapps/alfresco.war-*.bak
-
+if [[ `\ls amps` == *.* ]]; then
+  bin/apply_amps.sh
+  rm web-server/webapps/alfresco.war-*.bak
+fi
 if [[ -d alfresco-pdf-renderer ]]; then
   mv alfresco-pdf-renderer pdf-renderers
 else
