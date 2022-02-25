@@ -8,7 +8,7 @@ fi
 from=${0%/*} && (( $# > 0 )) && from="$1"
 for f in apache_tomcat alfresco_content alfresco_search; do
   for found in $from/${f/_/-}-*.zip; do break; done
-  (( ${#found} == 0 )) && echo Error: cannot find $from/${f/_/-}-*.zip && exit
+  [[ ! -f ${found} ]] && echo Error: cannot find $from/${f/_/-}-*.zip && exit
   echo Found $found
   eval ${f}="$found"
 done
@@ -69,6 +69,14 @@ cat > alfresco.sh <<-'END'
 END
 chmod +x alfresco.sh
 
+for share in $from/alfresco*-share-*.zip; do break; done
+if [[ -f ${share} ]]; then
+  echo Found $share
+  unzip -oj $share -d tomcat/webapps \*/share.war
+  unzip -oj $share -d amps \*/alfresco-share-services.amp
+  unzip -oj $share -d tomcat/conf/Catalina/localhost \*/share.xml
+  unzip -oj $share -d tomcat/shared/classes/alfresco/web-extension/ \*/web-extension-samples/*
+fi
 if [[ `\ls amps` == *.* ]]; then
   bin/apply_amps.sh
   rm web-server/webapps/alfresco.war-*.bak
