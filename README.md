@@ -5,14 +5,19 @@ Alfresco 6.0 switching to container deployment is a good thing. What's wrong wit
 ## Download Three Files
 This Bash script automates the installation of Alfresco ACS Community 6.x and 7.x. It looks for 3 downloaded files in the same folder of the script or a folder specified as the script's first parameter.
 
-- [apache_tomcat-\*.zip](https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.37/bin/apache-tomcat-9.0.37.zip)
+- [apache-tomcat-\*.zip](https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.37/bin/apache-tomcat-9.0.37.zip)
 - [alfresco-content-\*.zip](https://artifacts.alfresco.com/nexus/content/repositories/public/org/alfresco/alfresco-content-services-community-distribution/6.2.0-ga/alfresco-content-services-community-distribution-6.2.0-ga.zip)
-- [alfresco-search-\*.zip](https://artifacts.alfresco.com/nexus/content/repositories/public/org/alfresco/alfresco-search-services/1.4.0/alfresco-search-services-1.4.0.zip)
+- [alfresco-search-\*.zip](https://artifacts.alfresco.com/nexus/content/repositories/public/org/alfresco/alfresco-search-services/1.4.3.4/alfresco-search-services-1.4.3.4.zip)
 
-The above links are for Tomcat 9.0.37, ACS 6.2.0-ga, Search Services 1.4.0. For Alfresco 7.1, use these with Tomcat 9.0.37:
+and optionally:
+
+- [apache\*-share-\*.zip](https://artifacts.alfresco.com/nexus/content/repositories/public/org/alfresco/alfresco-content-services-share-distribution/6.2.2.6/alfresco-content-services-share-distribution-6.2.2.6.zip)
+
+The above links are for Tomcat 9.0.37, ACS 6.2.0-ga, Search Services 1.4.3.4 and Share 6.2.2.6. For Alfresco 7.1, use these with Tomcat 9.0.37:
 
 - [alfresco-content-services-community-distribution-7.1.1.zip](https://artifacts.alfresco.com/nexus/content/repositories/public/org/alfresco/alfresco-content-services-community-distribution/7.1.1/alfresco-content-services-community-distribution-7.1.1.zip)
 - [alfresco-search-services-2.0.1.1.zip](https://artifacts.alfresco.com/nexus/content/repositories/public/org/alfresco/alfresco-search-services/2.0.1.1/alfresco-search-services-2.0.1.1.zip)
+- [alfresco-content-services-share-distribution-7.1.1.zip](https://artifacts.alfresco.com/nexus/content/repositories/public/org/alfresco/alfresco-content-services-share-distribution/7.1.1/alfresco-content-services-share-distribution-7.1.1.zip)
 
 Here are links for older versions:
 
