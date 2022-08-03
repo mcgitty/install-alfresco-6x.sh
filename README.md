@@ -13,14 +13,15 @@ and optionally:
 
 - [apache\*-share-\*.zip](https://artifacts.alfresco.com/nexus/content/repositories/public/org/alfresco/alfresco-content-services-share-distribution/6.2.2.6/alfresco-content-services-share-distribution-6.2.2.6.zip)
 
-The above links are for Tomcat 9.0.37, ACS 6.2.0-ga, Search Services 1.4.3.4 and Share 6.2.2.6. For Alfresco 7.1, use these with Tomcat 9.0.37:
+The above links are for Tomcat 9.0.37, ACS 6.2.0-ga, Search Services 1.4.3.4 and Share 6.2.2.6. For Alfresco 7.2, use these with Tomcat 9.0.37:
 
-- [alfresco-content-services-community-distribution-7.1.1.zip](https://artifacts.alfresco.com/nexus/content/repositories/public/org/alfresco/alfresco-content-services-community-distribution/7.1.1/alfresco-content-services-community-distribution-7.1.1.zip)
-- [alfresco-search-services-2.0.1.1.zip](https://artifacts.alfresco.com/nexus/content/repositories/public/org/alfresco/alfresco-search-services/2.0.1.1/alfresco-search-services-2.0.1.1.zip)
-- [alfresco-content-services-share-distribution-7.1.1.zip](https://artifacts.alfresco.com/nexus/content/repositories/public/org/alfresco/alfresco-content-services-share-distribution/7.1.1/alfresco-content-services-share-distribution-7.1.1.zip)
+- [alfresco-content-services-community-distribution-7.2.1.zip](https://artifacts.alfresco.com/nexus/content/repositories/public/org/alfresco/alfresco-content-services-community-distribution/7.2.1/alfresco-content-services-community-distribution-7.2.1.zip)
+- [alfresco-search-services-2.0.4.zip](https://artifacts.alfresco.com/nexus/content/repositories/public/org/alfresco/alfresco-search-services/2.0.4/alfresco-search-services-2.0.4.zip)
+- [alfresco-content-services-share-distribution-7.2.1.zip](https://artifacts.alfresco.com/nexus/content/repositories/public/org/alfresco/alfresco-content-services-share-distribution/7.2.1/alfresco-content-services-share-distribution-7.2.1.zip)
 
 Here are links for older versions:
 
+- [alfresco-content-services-community-distribution-7.1.1.zip](https://artifacts.alfresco.com/nexus/content/repositories/public/org/alfresco/alfresco-content-services-community-distribution/7.1.1/alfresco-content-services-community-distribution-7.1.1.zip)
 - [alfresco-content-services-community-distribution-7.0.0.zip](https://artifacts.alfresco.com/nexus/content/repositories/public/org/alfresco/alfresco-content-services-community-distribution/7.0.0/alfresco-content-services-community-distribution-7.0.0.zip)
 - [alfresco-content-services-community-distribution-6.0.7-ga.zip](https://artifacts.alfresco.com/nexus/content/repositories/public/org/alfresco/alfresco-content-services-community-distribution/6.0.7-ga/alfresco-content-services-community-distribution-6.0.7-ga.zip)
 - [alfresco-content-services-community-distribution-6.1.2-ga.zip](https://artifacts.alfresco.com/nexus/content/repositories/public/org/alfresco/alfresco-content-services-community-distribution/6.1.2-ga/alfresco-content-services-community-distribution-6.1.2-ga.zip)

@@ -96,8 +96,13 @@ cd ../tomcat/lib
 wget --no-check-certificate https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.48/mysql-connector-java-5.1.48.jar
 cd ../..
 
+sMode=none sParam='none"'
+if [[ $ver > "7.1" ]]; then
+  sMode=secret sParam='secret -Dalfresco.secureComms.secret=password"'
+fi
+
 # Disable https from solr to alfresco (NOT FOR PRODUCTION)
-echo 'SOLR_OPTS="$SOLR_OPTS -Dalfresco.secureComms=none"' >> search-services/solr.in.sh
+echo 'SOLR_OPTS="$SOLR_OPTS -Dalfresco.secureComms='$sParam >> search-services/solr.in.sh
 echo JAVA_HOME=\"${JAVA_HOME}\" >> search-services/solr.in.sh
 # First time Solr startup
 search-services/solr/bin/solr start -a "-Dcreate.alfresco.defaults=alfresco,archive"
@@ -127,10 +132,11 @@ share.port=8080
 share.protocol=http
 
 index.subsystem.name=solr6
-solr.secureComms=none
+solr.secureComms=$sMode
 solr.port=8983
 solr.host=localhost
 solr.base.url=/solr
+solr.sharedSecret=password
 
 alfresco-pdf-renderer.exe=bin/alfresco-pdf-renderer
 alfresco.rmi.services.host=0.0.0.0
